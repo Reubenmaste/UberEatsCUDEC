@@ -1,14 +1,29 @@
-<<<<<<< HEAD
 db.collection ("platillos").onSnapshot((datos) =>{
-    datos.forEach((registro) => {
-        console.log(registro.data());
-        
+    datos.docChanges().forEach((registro) => {
+        if (registro.type === "added"){
+            mostrarPlatillo(registro.doc.data(), registro.doc.id);
+        }
+        if (registro.type === "modified"){
+            actualizarPlantillo(registro.doc.data(), registro.doc.id);
+        }
     });    
-    
-=======
-db.collection("platillos").onSnapshot((coleccion) => {
-    coleccion.forEach((registro) => {
-        console.log(registro);
-    });
->>>>>>> 9b8c55b6c9f0d0cabe41214613f33183fd6e3126
+});
+
+const formularioAgregar = document.querySelector("form");
+formularioAgregar.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const platilloNuevo = {
+        nombre: formularioAgregar.title.value,
+        ingredientes: formularioAgregar.ingredients.value,
+        Precio: formularioAgregar.price.value
+    }
+    db.collection("platillos").add(platilloNuevo)
+    .catch((error) =>{
+        console.log(error);
+        alert("Error al agregar paltillo");
+    }
+    );
+    formularioAgregar.title.value ="";
+    formularioAgregar.ingredients.value="";
+    formularioAgregar.price.value="";
 });
