@@ -1,47 +1,73 @@
-btnAgregarPlatillo = document.getElementById('btnAgregarPlatillo');
+const btnAgregarPlatillo = document.getElementById('btnAgregarPlatillo');
 let contenido = '';
 
 document.addEventListener('DOMContentLoaded', function() {
-  // nav menu
+
+  // Menú lateral derecho
   const menus = document.querySelectorAll('.side-menu');
-  M.Sidenav.init(menus, {edge: 'right'});
-  // add recipe form
+  M.Sidenav.init(menus, { edge: 'right' });
+
+  // Formulario lateral izquierdo
   const forms = document.querySelectorAll('.side-form');
-  M.Sidenav.init(forms, {edge: 'left'});
+  M.Sidenav.init(forms, { edge: 'left' });
+
+  // Selects de Materialize
+  const selects = document.querySelectorAll('select');
+  M.FormSelect.init(selects);
+
 });
 
-btnAgregarPlatillo.addEventListener('click', function() {
+// Evento del botón
+btnAgregarPlatillo.addEventListener('click', function(e) {
+  e.preventDefault();
   alert('Platillo agregado');
 });
 
-    function mostrarPlatillo(platillo, id){
-         contenido += 
-         `<div class="card-panel recipe white row" 
-          id="${id}">
-           <div class="recipe-details">
-            <div class= "recipe-title">
-            ${platillo.nombre} 
-            </div>
-          <div class="recipe-ingredients">
-            Ingredientes: ${platillo.ingredientes} 
-          </div>
-          <div class="recipe-price">
-            Precio: ${platillo. Precio} 
-          </div>
+// Mostrar platillo
+function mostrarPlatillo(platillo, id) {
+
+  contenido += `
+    <div class="card-panel recipe white row" id="${id}">
+      <div class="recipe-details">
+
+        <div class="recipe-title">
+          ${platillo.nombre}
         </div>
-        <div class="recipe-delete">
-          <i class="material-icons" data-id="${id}">delete_outline</i>
+
+        <div class="recipe-ingredients">
+          Ingredientes: ${platillo.ingredientes}
         </div>
-      </div>`;
-        document.querySelector('.recipes').innerHTML = contenido
 
-    }
+        <div class="recipe-price">
+          Precio: $${platillo.precio}
+        </div>
 
-    function actualizarPlantillo(plantillo, id){
-      let tarjeta = document.getElementById(`${id}`);
-      tarjeta.querySelector(".recipe-tittle").innerHTML = platillo.nombre;
-      tarjeta.querySelector(".recipe-ingredients").innerHTML = platillo.ingredientes;
-      tarjeta.querySelector(".recipe-price").innerHTML = platillo.precio;
-    }
+      </div>
 
-    
+      <div class="recipe-delete">
+        <i class="material-icons" data-id="${id}">
+          delete_outline
+        </i>
+      </div>
+    </div>
+  `;
+
+  document.querySelector('.recipes').innerHTML = contenido;
+}
+
+// Actualizar platillo
+function actualizarPlatillo(platillo, id) {
+
+  const tarjeta = document.getElementById(id);
+
+  if (!tarjeta) return;
+
+  tarjeta.querySelector('.recipe-title').innerHTML =
+    platillo.nombre;
+
+  tarjeta.querySelector('.recipe-ingredients').innerHTML =
+    `Ingredientes: ${platillo.ingredientes}`;
+
+  tarjeta.querySelector('.recipe-price').innerHTML =
+    `Precio: $${platillo.precio}`;
+}
