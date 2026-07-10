@@ -27,3 +27,96 @@ document.getElementById('listaPlatillos').innerHTML=contenidoLista;
 }
 M.AutoInit();
 
+
+
+
+btnGuardarPedido = document.getElementById('btnGuardarPedido');
+let contenido ="";
+
+btnGuardarPedido.addEventListener('click', function() {
+
+  const selectPlatillos = document.getElementById('listaPlatillos');
+  const inputDireccion = document.getElementById('Direccion');
+  const inputUsuario = document.getElementById('nombre');
+
+
+  const platilloId = selectPlatillos.value;
+  const platilloNombre = selectPlatillos.options[selectPlatillos.selectedIndex].text;
+  const usuarionombre = inputUsuario.value.trim();
+  const direccion = inputDireccion.value.trim();
+
+
+  if (!platilloId || !direccion) {
+    alert('Selecciona las opciones paro');
+    return;
+  }
+
+  const pedidoNuevo = {
+    platilloId: platilloId,
+    usuario: usuarionombre,
+    platilloNombre: platilloNombre,
+    dirrecion: direccion
+  };
+
+  db.collection("pedidos").add(pedidoNuevo)
+    .then(() => {
+      alert('pedido agregado');
+      inputDireccion.value = "";
+      inputUsuario.value= "";
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('error al agregar pedido');
+    });
+});
+
+function actualizarPlatillo(pedido, id){
+  let tarjeta =document.getElementById(`${id}`);
+  tarjeta.querySelector(".recipe-title").innerHTML = pedido.platillo;
+  tarjeta.querySelector(".recipe-ingredients").innerHTML = pedido.dirrecion;
+}
+
+
+btnCanselar.addEventListener('click', function() {
+    window.location.href = "/index.html"; 
+          inputDireccion.value = "";
+          inputUsuario.value = "";
+});
+
+
+document.getElementById('btnUbicacion').addEventListener('click', function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(exito, error); 
+      
+    ;
+  }
+});
+
+
+function exito(posicion) {
+  let latitud = posicion.coords.latitude;
+  let longitud = posicion.coords.longitude;
+  fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitud}&lon=${longitud} `, {
+    headers: {
+      'User-Agent': 'UberEatsYahir/ (spyinfiltrado@gmail.com)'
+    }
+  })
+  .then(respuesta => respuesta.json())
+  .then(data => {
+    let ciudad = data.address.city;
+    let pais = data.address.country;
+    document.getElementById("Direccion").value = `${ciudad}, ${pais}`;
+    var map = L.map ('mapa').setView([latitud, longitud], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        var marker = L.marker([latitud, longitud]).addTo(map);
+    })
+    .catch(error => console.error(error));
+}
+
+function error() {
+  M.toast({html: 'No se pudo obtener la ubicación'});
+}

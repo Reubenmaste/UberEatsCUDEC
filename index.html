@@ -25,19 +25,14 @@
   <!-- Menu lateral -->
   <ul id="side-menu" class="sidenav side-menu">
     <li><a class="subheader">UberEatsCUDEC</a></li>
-
     <li><a href="/" class="waves-effect">Inicio</a></li>
-  
     <li><a href="/pages/about.html" class="waves-effect">Acerca</a></li>
-
+    <li><a href="/pages/pedidos.html" class="waves-effect">Pedidos</a></li>
     <li><div class="divider"></div></li>
     <li><a href="/pages/contact.html" class="waves-effect">
-      <i class="material-icons">mail_outline</i>Contacto</a>
-      
-    <li><a href="/pages/pedidos.html" class="waves-effect">
-  <i class="material-icons">shopping_basket</i>Pedidos
-</a></li>
-</ul>
+      <i class="material-icons">mail_outline</i>Contacto</a></li>
+
+  </ul>
 
   <!-- Lista de platillos -->
   <div class="recipes container grey-text text-darken-1">
@@ -63,25 +58,38 @@
         <input placeholder="e.g. Tofu, mushroom, garlic" id="ingredients" type="text" class="validate">
         <label for="ingredients">Ingredientes</label>
       </div>
-         <div class="input-field">
-        <input placeholder="e.g. Dinero real no de amentis" id="price" type="number" class="validate">
+            <div class="input-field">
+        <input placeholder="e.g. cachs el pequeño nicolachs" id="Precio" type="text" class="validate">
         <label for="ingredients">Precio</label>
       </div>
+
       <div class="input-field center">
         <button id="btnAgregarPlatillo" class="btn-small">Agregar</button>
       </div>
     </form>
+    <button id=""btnFoto">imagen</button>
+    <div id="camara">
+            <video id="video">No hay video disponible</video>
+            </div>
+            <canvas id="canvas"></canvas>
+            <div id="salida">
+                  <img id="foto" src="" alt="Foto del platillo">
+            </div>
+    </div>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"> 
+  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js">
   </script>
 
-    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"> 
+  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js">
   </script>
+ 
+
 
   <script src="/js/firebase.js"></script>
   <script src="/js/index.js"></script>
   <script src="/js/db.js"></script>
+
 
 </body>
 </html>
