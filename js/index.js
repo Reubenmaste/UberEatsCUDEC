@@ -75,6 +75,56 @@ const canvas= document.getElementById("canvas");
 
 const foto= document.getElementById("foto");
 
+const bntFoto = document.getElementById('video')
+
+const btnTomarFoto = document.getElementById('video')
+
+bntFoto.addEventListener("click", function(){
+  navigator.mediaDevices
+  .getUserMedia({
+    video:{
+      facingMode: {
+        ideal: "enviroment"
+      }
+    },
+    audio: false
+  })
+  .then((streaming) => {
+    video.srcObject = streaming;
+    video.play();
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+})
+
+video.addEventListener("canplay", () =>{
+  if (!streaming){
+    height = video.videoheight / (video.videoWidth / width);
+    video.setAttribute("width", width);
+    video.setAttribute("height",height);
+    streaming = true;
+  }
+})
+
+btnTomarFoto.addEventListener("click", tomarFoto);
+
+function tomarFoto(){
+  const contexto = canvas.getContext("2d");
+  if(width && height) {
+    canvas.width = width;
+    canvas.height = height;
+    contexto.drawImage(video,0,0, width, height);
+    const fotoFinal = canvas.toDataUrl("image/png");
+    foto.setAttribute ("src", fotoFinal);
+    document.getElementById("foto").value = fotoFinal;
+  }
+  else{
+    linpiarFoto();
+  }
+}
+
 function tomarFoto(){
   const contexto = canvas.getContext("2d");
   if(width&&height){
