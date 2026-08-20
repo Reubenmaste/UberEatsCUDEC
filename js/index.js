@@ -122,6 +122,24 @@ function capturarFoto(){
     limpiarFoto();
   }
 }
+
+video.addEventListener("canplay", function(){
+  if (!streaming){
+    height = video.videoHeight / (video.videoWidth / width);
+    video.setAttribute("width", width);
+    video.setAttribute("height", height);
+    streaming = true;
+  }
+});
+
+function iniciarCamara(){
+  pararCamara();
+  abrirStream({ video: { facingMode: { ideal: facingMode }, width: { ideal: 640 }, height: { ideal: 480 } }, audio: false })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 btnCapturar.addEventListener("click", function(e){
   e.preventDefault();
   capturarFoto();
