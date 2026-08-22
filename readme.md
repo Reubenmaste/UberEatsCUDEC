@@ -4,17 +4,15 @@
 
 - Mixes Homero — identificador interno `UBEREATSCUDEC`
 - Tipo de aplicación: PWA (Progressive Web App)
-- **Descripción breve:** Aplicación web progresiva para consultar el catálogo de platillos, registrar nuevos platillos con foto y precio, y gestionar pedidos desde el celular o la computadora.
-- **Materia / carrera / alumno:** _[Completar: nombre de la materia, carrera y alumno(s)]_
-
-> **Nota:** el `<title>` y el menú muestran "Mixes Homero", mientras que el `manifest.json` y las meta etiquetas usan el nombre "UBEREATSCUDEC". Vale la pena unificar el nombre antes de la entrega final.
+- Aplicación web progresiva para consultar el catálogo de platillos, registrar nuevos platillos con foto y precio, y gestionar pedidos desde el celular o la computadora.
+- Taller de programacion avanzada / ing. Sitemas / alumno: Yahir Olvera Garcia
 
 ## 2. Descripción del proyecto
 
 La aplicación digitaliza el menú de un negocio de comida (mixes/antojitos), permitiendo a los usuarios ver los platillos disponibles, y a un administrador registrar nuevos platillos (nombre, ingredientes, precio y fotografía tomada desde la cámara del dispositivo). También contempla un módulo de pedidos para que los clientes puedan realizar y dar seguimiento a sus órdenes.
 
-- **Usuarios:** clientes del negocio y administrador(es) que dan de alta los platillos.
-- **Propósito:** ofrecer un catálogo accesible, instalable como app (PWA) y con funcionamiento offline básico gracias al service worker.
+- clientes del negocio y administrador(es) que dan de alta los platillos.
+- ofrecer un catálogo accesible, instalable como app (PWA) y con funcionamiento offline básico gracias al service worker.
 
 ## 3. Objetivos
 
@@ -77,16 +75,14 @@ Desarrollar una Progressive Web App que permita administrar y consultar el catá
     └── contact.html
 ```
 
-> Nota: `index.html` referencia los iconos directamente en la raíz (`icon-16x16.png`, etc.), mientras que `manifest.json` los referencia dentro de `img/icons/`. Conviene unificar la ruta para que ambos coincidan.
-
 ## 7. Evidencias / capturas de pantalla
 
 _[Agregar capturas de pantalla de:]_
-- Inicio
-- Registrar platillo
-- Realizar pedido (al terminar de hacer el pedido)
-- Acerca
-- Contacto
+- Inicio![alt text](image.png)
+- Registrar platillo![alt text](image-1.png)
+- Realizar pedido (al terminar de hacer el pedido)![alt text](image-2.png)
+- Acerca![alt text](image-3.png)
+- Contacto![alt text](image-4.png)
 
 ## 8. Base de datos
 
